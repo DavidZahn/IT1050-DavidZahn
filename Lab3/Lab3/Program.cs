@@ -22,9 +22,9 @@ namespace Lab3
           * task. (thus requiring declaration in each section)
           */
 
-         { 
+         {
             // Lab3 Task 3 single selection if statement
-         
+            Console.WriteLine("Task 3: Use IF statement to output if speed > speedLimit\n");
             int speedLimit = 35;
             int speed = 42;
 
@@ -38,8 +38,8 @@ namespace Lab3
          }
 
          {
-            // Lab3 Task 4 with true value
-
+            // Lab3 Task 4 double selection if-else statement with true value
+            Console.WriteLine("Task 4: Use IF-ELSE statements to show condition of bool variable isTrue\n");
             bool isTrue = true;
 
             if (isTrue)
@@ -57,7 +57,7 @@ namespace Lab3
 
          {
             // Lab3 Task 4 identical code except with false value
-
+            Console.WriteLine("Task 4: changed value of bool variable isTrue to false\n");
             bool isTrue = false;
 
             if (isTrue)
@@ -75,11 +75,20 @@ namespace Lab3
 
          {
             // Lab3 Task 5 F to C temperature conversion
-
+            Console.WriteLine("Task 5: Convert user supplied Fahrenheit temperature to Celsius.");
+            Console.WriteLine("        Use IF statements to show hot or cold warning\n");
             Console.Write("Enter the temperature in Fahrenheit: ");
             double fahrenheit = Convert.ToDouble(Console.ReadLine());
             double celsius = (fahrenheit - 32) * 5 / 9;
-            Console.WriteLine($"\n\n {fahrenheit} degrees Fahrenheit = {celsius} degrees Celsius.");
+            Console.WriteLine($"\n\n {fahrenheit} degrees Fahrenheit = {celsius:F} degrees Celsius."); // rounding celsius calculation to 2 decimal places
+            if (fahrenheit < 40)
+            {
+               Console.WriteLine("It is cold");
+            }
+            else if (fahrenheit > 90)
+            {
+               Console.WriteLine("It is hot");
+            }
 
             Console.WriteLine("Press [Enter] to continue.");
             Console.ReadLine(); // Added this to separate programs
@@ -87,7 +96,7 @@ namespace Lab3
 
          {
             // Lab3 Task 6 while loop output 1 to 10 increment by 1
-
+            Console.WriteLine("Task 6: Display numbers 1 to 10 increment by 1\n");
             int counter = 1;
 
             while (counter <= 10)
@@ -95,7 +104,7 @@ namespace Lab3
                Console.Write($"{counter}, ");
                counter++;
             }
-            Console.WriteLine();
+            Console.WriteLine("\b\b ");
 
             Console.WriteLine("Press [Enter] to continue.");
             Console.ReadLine(); // Added this to separate programs
@@ -104,7 +113,7 @@ namespace Lab3
 
          {
             // Lab3 Task 7 while loop output 60 to 20 decrement by 5
-
+            Console.WriteLine("Task 7: Display numbers 60 to 20 decrement by 5\n");
             int counter = 60;
 
             while (counter >= 20)
@@ -112,7 +121,7 @@ namespace Lab3
                Console.Write($"{counter}, "); 
                counter -=5;
             }
-            Console.WriteLine();
+            Console.WriteLine("\b\b ");
 
             Console.WriteLine("Press [Enter] to continue.");
             Console.ReadLine(); // Added this to separate programs
@@ -120,14 +129,14 @@ namespace Lab3
 
          {
             // Lab3 Task 8 while loop output 10 to 20 increment by 2
-
+            Console.WriteLine("Task 8: Display numbers 10 to 20 increment by 2\n");
             int counter = 10;
             while (counter <= 20)
             {
                Console.Write($"{counter}, ");
                counter +=2;
             }
-            Console.WriteLine();
+            Console.WriteLine("\b\b ");
 
             Console.WriteLine("Press [Enter] to continue.");
             Console.ReadLine(); // Added this to separate programs
