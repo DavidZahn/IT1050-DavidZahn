@@ -24,11 +24,10 @@ namespace PlayingAround
       // plays one game of craps
       static void Main()
       {
+         
          int bank = 1000;
-
-         Console.WriteLine($"Your bank is {bank}.\nEnter your bet (0 to quit):");
-         int bet = int.Parse(Console.ReadLine());
-
+         int bet = PlaceYourBet(bank);
+         
          while (bet>0 && bank>0)
          {
             Console.Clear();
@@ -98,23 +97,13 @@ namespace PlayingAround
                bank -= bet;
             }
 
-            Console.WriteLine($"Your bank is {bank}.");
             if (bank <= 0)
             {
                Console.WriteLine("You are BUST.");
             }
             else
             {
-               Console.WriteLine("Enter your bet (0 to quit):");
-               string input = Console.ReadLine();
-               if (input == "")
-               {
-                  bet = 0;
-               }
-               else
-               {
-                  bet = int.Parse(input);
-               }
+               bet = PlaceYourBet(bank);
             }
          }
          Console.Write("\n\nGit outta here");
@@ -126,6 +115,45 @@ namespace PlayingAround
          {
             Console.WriteLine("!");
          }
+         if (bank < 0)
+         {
+            Console.WriteLine("And if ya don't bring me {0},", Math.Abs(bank));
+            Console.WriteLine("I'll break ya kneecaps!");
+         }
+
+      }
+
+      static int PlaceYourBet(int bank)
+      {
+         int bet;
+         Console.WriteLine($"You have: {bank}");
+         Console.WriteLine("Enter your bet (0 to quit):");
+         string input = Console.ReadLine();
+         if (input == "")
+         {
+            Console.WriteLine("Enter 0 to quit.");
+            bet = PlaceYourBet(bank);
+            return bet;
+         }
+         else
+         {
+            bet = int.Parse(input);
+         }
+         if (bet <= bank)
+         {
+            return bet;
+         }
+         if (bet <= bank + 100)
+         {
+            Console.WriteLine("OK, I'll cover ya for it but ya betta win!");
+            Console.WriteLine("Press <ENTER> to roll.");
+            Console.ReadLine();
+            return bet;
+         }
+         Console.WriteLine("Na, I ain't gonna float you that much!");
+         bet = PlaceYourBet(bank);
+         return bet;
+
 
       }
 
@@ -162,7 +190,7 @@ namespace PlayingAround
          {
             Console.WriteLine("║ {0} ║  ║ {1} ║", dieFace[i,die1-1], dieFace[i,die2-1]);
          }
-         Console.WriteLine("╚═════╝  ╚═════╝   =  {0}", sum);
+         Console.WriteLine("╚═════╝  ╚═════╝   =  {0}", (DiceNames) sum);
       }
 
    }
