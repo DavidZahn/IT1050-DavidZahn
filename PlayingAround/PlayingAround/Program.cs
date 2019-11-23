@@ -16,8 +16,8 @@ namespace PlayingAround
       {
          SnakeEyes = 2,
          Trey = 3,
-         Seven = 7,
-         YoLeven = 11,
+         SEVEN = 7,
+         YOLEVEN = 11,
          BoxCars = 12
       }
 
@@ -26,10 +26,12 @@ namespace PlayingAround
       {
          
          int bank = 1000;
-         int bet = PlaceYourBet(bank);
+         int prevBet = 0;
+         int bet = PlaceYourBet(bank,prevBet);
          
          while (bet>0 && bank>0)
          {
+            prevBet = bet;
             Console.Clear();
             Console.WriteLine("Bank:{0}  Bet:{1}", bank, bet);
             // gameStatus can contain Continue, Won or Lost
@@ -42,13 +44,16 @@ namespace PlayingAround
             // determine game status and point based on first roll
             switch ((DiceNames)sumOfDice)
             {
-               case DiceNames.Seven: // win with 7 on first roll   
-               case DiceNames.YoLeven: // win with 11 on first roll
+               case DiceNames.SEVEN: // win with 7 on first roll   
+               case DiceNames.YOLEVEN: // win with 11 on first roll
+                  
+                  Console.WriteLine($"{(DiceNames)sumOfDice}!!!");
                   gameStatus = Status.Won;
                   break;
                case DiceNames.SnakeEyes: // lose with 2 on first roll
                case DiceNames.Trey: // lose with 3 on first roll     
                case DiceNames.BoxCars: // lose with 12 on first roll 
+                  Console.WriteLine($"{(DiceNames)sumOfDice}!");
                   gameStatus = Status.Lost;
                   break;
                default: // did not win or lose, so remember point  
@@ -78,7 +83,7 @@ namespace PlayingAround
                else
                {
                   // lose by rolling 7 before point
-                  if (sumOfDice == (int)DiceNames.Seven)
+                  if (sumOfDice == (int)DiceNames.SEVEN)
                   {
                      gameStatus = Status.Lost;
                   }
@@ -103,7 +108,7 @@ namespace PlayingAround
             }
             else
             {
-               bet = PlaceYourBet(bank);
+               bet = PlaceYourBet(bank, prevBet);
             }
          }
          Console.Write("\n\nGit outta here");
@@ -117,28 +122,42 @@ namespace PlayingAround
          }
          if (bank < 0)
          {
-            Console.WriteLine("And if ya don't bring me {0},", Math.Abs(bank));
-            Console.WriteLine("I'll break ya kneecaps!");
+            Console.WriteLine("And if ya don't bring me my {0},", Math.Abs(bank));
+            Console.WriteLine("I'll break yer kneecaps!");
          }
 
       }
 
-      static int PlaceYourBet(int bank)
+      static int PlaceYourBet(int bank, int prevBet)
       {
          int bet;
          Console.WriteLine($"You have: {bank}");
-         Console.WriteLine("Enter your bet (0 to quit):");
+         Console.Write("Enter your bet\n (0 to quit or <ENTER>\n to keep the same bet): ");
          string input = Console.ReadLine();
          if (input == "")
          {
-            Console.WriteLine("Enter 0 to quit.");
-            bet = PlaceYourBet(bank);
-            return bet;
+            if (prevBet == 0)
+            {
+               Console.WriteLine("There is no previous bet!");
+               bet = PlaceYourBet(bank, prevBet);
+               return bet;
+            }
+            else
+            {
+               return prevBet;
+            }
          }
          else
          {
             bet = int.Parse(input);
          }
+
+         if (bet < 0)
+         {
+            Console.WriteLine("What are you, some kind of wise guy?");
+            return 0;
+         }
+
          if (bet <= bank)
          {
             return bet;
@@ -151,7 +170,7 @@ namespace PlayingAround
             return bet;
          }
          Console.WriteLine("Na, I ain't gonna float you that much!");
-         bet = PlaceYourBet(bank);
+         bet = PlaceYourBet(bank, prevBet);
          return bet;
 
 
@@ -190,7 +209,7 @@ namespace PlayingAround
          {
             Console.WriteLine("║ {0} ║  ║ {1} ║", dieFace[i,die1-1], dieFace[i,die2-1]);
          }
-         Console.WriteLine("╚═════╝  ╚═════╝   =  {0}", (DiceNames) sum);
+         Console.WriteLine("╚═════╝  ╚═════╝   =  {0}\n", sum);
       }
 
    }
