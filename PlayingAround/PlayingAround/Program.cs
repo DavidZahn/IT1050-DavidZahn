@@ -197,7 +197,7 @@ namespace PlayingAround
       {
          int sum = die1 + die2;
          
-         string[,] dieFace = new string[,]
+         string[,] dieFace = 
          {
             { "   ", "O  ", "O  ", "O O", "O O", "O O" },
             { " O ", "   ", " O ", "   ", " O ", "O O" },
