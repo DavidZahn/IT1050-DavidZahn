@@ -30,6 +30,7 @@ namespace Lab6
             // Task 4: Create 4 element array of seasons
             // Note: I was OH SO tempted to make the following array:
             // string[] seasons = { "Crappy", "Wet", "Construction", "Pretty" };
+            // but sensibility overrulled sense of humor!
 
             string[] seasons = { "Winter", "Spring", "Summer", "Fall" };
             foreach (var season in seasons)
